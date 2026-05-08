@@ -1,0 +1,195 @@
+.cta {
+  position: relative;
+  overflow: hidden;
+  padding: 120px 0;
+  background: var(--bg-primary);
+}
+
+.cta::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 600px;
+  height: 600px;
+  background: radial-gradient(circle, var(--accent-glow) 0%, transparent 70%);
+  filter: blur(80px);
+  opacity: 0.3;
+  pointer-events: none;
+}
+
+.cta__wrapper {
+  display: grid;
+  grid-template-columns: 1fr 1.1fr;
+  gap: 80px;
+  align-items: center;
+  position: relative;
+  z-index: 2;
+}
+
+.cta__title {
+  font-size: clamp(1.8rem, 4vw, 2.6rem); /* Tamanho reduzido para ser mais discreto */
+  font-weight: 800;
+  line-height: 1.2;
+  color: var(--text-primary);
+  margin: 12px 0 20px;
+  letter-spacing: -1px;
+}
+
+
+.cta__description {
+  font-size: 1.2rem;
+  color: var(--text-secondary);
+  line-height: 1.7;
+  max-width: 520px;
+  margin-bottom: 48px;
+}
+
+.cta__contacts {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.cta__contact-link {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  padding: 20px;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: var(--radius-lg);
+  transition: all var(--transition);
+}
+
+.cta__contact-link:hover {
+  background: rgba(255, 255, 255, 0.04);
+  border-color: var(--accent);
+  transform: translateX(8px);
+}
+
+.cta__contact-icon {
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--accent-subtle);
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  color: var(--accent);
+  font-size: 1.2rem;
+}
+
+.cta__contact-link label {
+  display: block;
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--text-muted);
+  margin-bottom: 4px;
+}
+
+.cta__contact-link span {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+/* Form Card */
+.cta__card {
+  position: relative;
+  background: rgba(10, 18, 36, 0.6);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 32px;
+  padding: 48px;
+  box-shadow: 0 40px 80px rgba(0, 0, 0, 0.4);
+}
+
+.cta__card-glow {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 200px;
+  height: 200px;
+  background: var(--accent-gradient);
+  filter: blur(100px);
+  opacity: 0.1;
+  pointer-events: none;
+}
+
+.cta__card h3 {
+  font-size: 1.8rem;
+  font-weight: 800;
+  margin-bottom: 32px;
+  letter-spacing: -0.5px;
+}
+
+.cta__form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.cta__input-group input,
+.cta__input-group textarea {
+  width: 100%;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 12px;
+  padding: 16px 20px;
+  color: var(--text-primary);
+  font-family: inherit;
+  font-size: 0.95rem;
+  transition: all var(--transition);
+}
+
+.cta__input-group input:focus,
+.cta__input-group textarea:focus {
+  outline: none;
+  border-color: var(--accent);
+  background: rgba(255, 255, 255, 0.05);
+  box-shadow: 0 0 20px rgba(34, 197, 94, 0.1);
+}
+
+.cta__submit {
+  margin-top: 12px;
+  height: 56px;
+  width: 100%;
+  justify-content: space-between;
+  padding: 0 32px;
+  border-radius: 16px;
+  font-size: 1rem;
+}
+
+@media (max-width: 1024px) {
+  .cta__wrapper {
+    grid-template-columns: 1fr;
+    gap: 64px;
+    text-align: center;
+  }
+
+  .cta__content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .cta__contacts {
+    width: 100%;
+    max-width: 400px;
+  }
+
+  .cta__contact-link:hover {
+    transform: translateY(-4px);
+  }
+}
+
+@media (max-width: 480px) {
+  .cta { padding: 80px 0; }
+  .cta__card { padding: 32px 24px; }
+  .cta__title { font-size: 2.2rem; }
+}

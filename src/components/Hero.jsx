@@ -1,6 +1,7 @@
 import { motion, useMotionValue, useTransform, animate } from 'framer-motion';
 import { useEffect, useRef, useState } from 'react';
 import { HiArrowRight } from 'react-icons/hi';
+import { useLanguage } from '../contexts/LanguageContext';
 import './Hero.css';
 
 function Counter({ value, duration = 2 }) {
@@ -27,6 +28,8 @@ function Counter({ value, duration = 2 }) {
 }
 
 export default function Hero() {
+  const { t } = useLanguage();
+
   return (
     <section className="hero" id="hero">
       <div className="hero__glow hero__glow--1" />
@@ -42,21 +45,21 @@ export default function Hero() {
           >
             <div className="hero__badge">
               <span className="hero__badge-dot" />
-              <span>Inovação que escala seu negócio</span>
+              <span>{t('hero.badge')}</span>
             </div>
 
             <h1 className="hero__title">
-              Tecnologia e <br />
-              <span className="accent">Inteligência Artificial</span> <br />
-              para todos os negócios
+              {t('hero.title1')} <br />
+              <span className="accent">{t('hero.titleAccent')}</span> <br />
+              {t('hero.title2')}
             </h1>
 
             <div className="hero__description">
               <p className="hero__subtitle">
-                Transformamos ideias em soluções digitais inteligentes, acessíveis e escaláveis para empresas de todos os portes.
+                {t('hero.subtitle1')}
               </p>
               <p className="hero__subtitle">
-                Desenvolvemos sistemas, aplicativos e automações com foco em performance, eficiência e crescimento.
+                {t('hero.subtitle2')}
               </p>
             </div>
 
@@ -68,9 +71,9 @@ export default function Hero() {
             >
               <div className="hero__metrics-inner">
                 {[
-                  { value: '30+', label: 'Projetos' },
-                  { value: '98%', label: 'Satisfação' },
-                  { value: '24/7', label: 'Suporte' },
+                  { value: '30+', label: t('hero.metrics.projects') },
+                  { value: '98%', label: t('hero.metrics.satisfaction') },
+                  { value: '24/7', label: t('hero.metrics.support') },
                 ].map((m, i) => (
                   <div key={i} className="hero__metric">
                     <span className="hero__metric-val">
@@ -91,7 +94,7 @@ export default function Hero() {
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
               >
-                Fale com um especialista
+                {t('hero.buttons.primary')}
                 <HiArrowRight />
               </motion.a>
               <motion.a
@@ -100,7 +103,7 @@ export default function Hero() {
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
               >
-                Conheça nossas soluções
+                {t('hero.buttons.secondary')}
               </motion.a>
             </div>
           </motion.div>
@@ -116,7 +119,7 @@ export default function Hero() {
               <div className="ui-window ui-window--web">
                 <div className="ui-window__header">
                   <div className="ui-dots"><span /><span /><span /></div>
-                  <div className="ui-tag">SISTEMAS WEB</div>
+                  <div className="ui-tag">{t('hero.ui.webSystems')}</div>
                 </div>
                 <div className="ui-window__body">
                   <div className="ui-web-layout">
@@ -144,14 +147,14 @@ export default function Hero() {
               {/* SOLUÇÕES COM IA */}
               <div className="ui-window ui-window--ia">
                 <div className="ui-window__header">
-                  <div className="ui-tag">SOLUÇÕES COM IA</div>
+                  <div className="ui-tag">{t('hero.ui.aiSolutions')}</div>
                   <div className="ui-dots"><span /><span /></div>
                 </div>
                 <div className="ui-window__body">
                   <div className="ui-ia-item">
                     <div className="ui-ia-icon ui-ia-icon--1" />
                     <div>
-                      <strong>Lead Inbound</strong>
+                      <strong>{t('hero.ui.aiItem1')}</strong>
                       <div className="ui-skeleton ui-skeleton--xs" />
                     </div>
                   </div>
@@ -159,7 +162,7 @@ export default function Hero() {
                   <div className="ui-ia-item">
                     <div className="ui-ia-icon ui-ia-icon--2" />
                     <div>
-                      <strong>Processamento IA</strong>
+                      <strong>{t('hero.ui.aiItem2')}</strong>
                       <div className="ui-skeleton ui-skeleton--xs" />
                     </div>
                   </div>
@@ -167,7 +170,7 @@ export default function Hero() {
                   <div className="ui-ia-item">
                     <div className="ui-ia-icon ui-ia-icon--3" />
                     <div>
-                      <strong>Ação Gerada</strong>
+                      <strong>{t('hero.ui.aiItem3')}</strong>
                       <div className="ui-skeleton ui-skeleton--xs" />
                     </div>
                   </div>
@@ -178,7 +181,7 @@ export default function Hero() {
               <div className="ui-window ui-window--mobile">
                 <div className="ui-mobile-notch" />
                 <div className="ui-window__header">
-                  <div className="ui-tag">MOBILE APP</div>
+                  <div className="ui-tag">{t('hero.ui.mobileApp')}</div>
                 </div>
                 <div className="ui-window__body">
                   <div className="ui-mobile-app">

@@ -144,6 +144,47 @@
   z-index: 1001;
 }
 
+.nav__lang-switcher {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: inherit;
+}
+
+.nav__lang-btn {
+  background: transparent;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  color: var(--text-secondary);
+  font-weight: 700;
+  font-size: 0.85rem;
+  letter-spacing: 1px;
+  transition: color var(--transition);
+}
+
+.nav__lang-btn.active {
+  color: var(--text-primary);
+}
+
+.nav__lang-btn:hover {
+  color: var(--text-primary);
+}
+
+.nav__lang-separator {
+  color: var(--text-secondary);
+  font-size: 0.85rem;
+  font-weight: 700;
+  opacity: 0.5;
+}
+
+.nav__lang-divider {
+  width: 1px;
+  height: 18px;
+  background: var(--border-color);
+  margin-left: 8px;
+}
+
 @media (max-width: 1024px) {
   .nav__links { display: none; }
   .nav__cta.btn { display: none; }

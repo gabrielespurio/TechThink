@@ -1,19 +1,20 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { HiMenuAlt3, HiX } from 'react-icons/hi';
+import { HiMenuAlt3, HiX, HiGlobe } from 'react-icons/hi';
+import { useLanguage } from '../contexts/LanguageContext';
 import './Navbar.css';
-
-const navLinks = [
-  { label: 'Inicio', href: '#hero' },
-  { label: 'Sobre', href: '#sobre' },
-  { label: 'Serviços', href: '#servicos' },
-  { label: 'Como Funciona', href: '#processo' },
-
-];
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
+  const { language, toggleLanguage, t } = useLanguage();
+
+  const navLinks = [
+    { label: t('nav.links.home'), href: '#hero' },
+    { label: t('nav.links.about'), href: '#sobre' },
+    { label: t('nav.links.services'), href: '#servicos' },
+    { label: t('nav.links.process'), href: '#processo' },
+  ];
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 40);
@@ -35,16 +36,7 @@ export default function Navbar() {
       <div className="nav__inner container">
         <a href="#" className="nav__logo">
           <img src="/logo.svg" alt="Tech Think Solutions" className="nav__logo-img" />
-
-
         </a>
-
-
-
-
-
-
-
 
         <div className="nav__links">
           {navLinks.map((l) => (
@@ -52,22 +44,41 @@ export default function Navbar() {
           ))}
         </div>
 
-        <a
-          href="https://wa.me/5517992204822"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="btn btn-primary nav__cta"
-        >
-          Contato
-        </a>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
+          <div className="nav__lang-switcher">
+            <button 
+              className={`nav__lang-btn ${language === 'pt' ? 'active' : ''}`}
+              onClick={() => language !== 'pt' && toggleLanguage()}
+            >
+              PT
+            </button>
+            <span className="nav__lang-separator">/</span>
+            <button 
+              className={`nav__lang-btn ${language === 'en' ? 'active' : ''}`}
+              onClick={() => language !== 'en' && toggleLanguage()}
+            >
+              EN
+            </button>
+            <div className="nav__lang-divider"></div>
+          </div>
+          
+          <a
+            href="https://wa.me/5517992204822"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="btn btn-primary nav__cta"
+          >
+            {t('nav.contact')}
+          </a>
 
-        <button
-          className="nav__toggle"
-          onClick={() => setMenuOpen(!menuOpen)}
-          aria-label="Menu"
-        >
-          {menuOpen ? <HiX size={24} /> : <HiMenuAlt3 size={24} />}
-        </button>
+          <button
+            className="nav__toggle"
+            onClick={() => setMenuOpen(!menuOpen)}
+            aria-label="Menu"
+          >
+            {menuOpen ? <HiX size={24} /> : <HiMenuAlt3 size={24} />}
+          </button>
+        </div>
       </div>
 
       <AnimatePresence>
@@ -89,6 +100,16 @@ export default function Navbar() {
                 {l.label}
               </a>
             ))}
+            
+            <button 
+              className="nav__mobile-link" 
+              onClick={() => { toggleLanguage(); setMenuOpen(false); }}
+              style={{ display: 'flex', alignItems: 'center', gap: '8px', background: 'transparent', color: '#fff' }}
+            >
+              <HiGlobe size={20} />
+              {language === 'pt' ? 'Mudar para Inglês (EN-US)' : 'Change to Portuguese (PT-BR)'}
+            </button>
+
             <a
               href="https://wa.me/5517992204822"
               target="_blank"
@@ -97,7 +118,7 @@ export default function Navbar() {
               style={{ width: '100%', marginTop: 8 }}
               onClick={() => setMenuOpen(false)}
             >
-              Contato
+              {t('nav.contact')}
             </a>
           </motion.div>
         )}

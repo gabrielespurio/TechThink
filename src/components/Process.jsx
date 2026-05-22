@@ -1,39 +1,23 @@
 import { motion, useInView } from 'framer-motion';
 import { useRef } from 'react';
 import { HiSearch, HiLightBulb, HiCode, HiCheck } from 'react-icons/hi';
+import { useLanguage } from '../contexts/LanguageContext';
 import './Process.css';
-
-const steps = [
-  {
-    icon: <HiSearch size={24} />,
-    title: 'Análise',
-    desc: 'Entendemos seu negócio e identificamos oportunidades de otimização',
-    items: ['Mapeamento de processos', 'Identificação de gargalos'],
-
-  },
-  {
-    icon: <HiLightBulb size={24} />,
-    title: 'Estratégia',
-    desc: 'Criamos uma estratégia personalizada para suas necessidades',
-    items: ['Planejamento detalhado', 'Cronograma de implementação', 'Definição de KPIs'],
-  },
-  {
-    icon: <HiCode size={24} />,
-    title: 'Desenvolvimento',
-    desc: 'Desenvolvemos e configuramos as soluções com precisão',
-    items: ['Desenvolvimento customizado', 'Testes rigorosos', 'Integração de sistemas'],
-  },
-  {
-    icon: <HiCheck size={24} />,
-    title: 'Entrega & Suporte',
-    desc: 'Monitoramos e otimizamos continuamente para máxima eficiência',
-    items: ['Monitoramento 24/7', 'Ajustes constantes', 'Suporte contínuo'],
-  },
-];
 
 export default function Process() {
   const ref = useRef(null);
   const inView = useInView(ref, { once: true, margin: '-80px' });
+  const { t } = useLanguage();
+
+  const steps = t('process.items').map((item, i) => ({
+    icon: [
+      <HiSearch size={24} />,
+      <HiLightBulb size={24} />,
+      <HiCode size={24} />,
+      <HiCheck size={24} />
+    ][i],
+    ...item
+  }));
 
   return (
     <section className="process section" id="processo" ref={ref}>
@@ -44,12 +28,12 @@ export default function Process() {
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6 }}
         >
-          <span className="section-tag">Metodologia</span>
+          <span className="section-tag">{t('process.tag')}</span>
           <h2 className="section-title">
-            Nosso <span className="accent">Processo</span>
+            {t('process.title1')} <span className="accent">{t('process.titleAccent')}</span>
           </h2>
           <p className="section-subtitle">
-            Do entendimento à entrega, cada etapa é pensada para garantir o melhor resultado.
+            {t('process.subtitle')}
           </p>
         </motion.div>
 
@@ -74,7 +58,7 @@ export default function Process() {
                 <h3 className="process__step-title">{step.title}</h3>
                 <p className="process__step-desc">{step.desc}</p>
                 <div className="process__mini-tasks">
-                  {step.items.map((item, j) => (
+                  {step.subItems.map((item, j) => (
                     <span key={j} className="process__mini-task">{item}</span>
                   ))}
                 </div>
@@ -95,12 +79,10 @@ export default function Process() {
             rel="noopener noreferrer"
             className="btn btn-primary btn-sm"
           >
-            Iniciar meu projeto
+            {t('process.button')}
           </a>
         </motion.div>
       </div>
-
-
     </section>
   );
 }

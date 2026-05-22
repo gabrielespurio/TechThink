@@ -1,12 +1,15 @@
 import { motion, useInView } from 'framer-motion';
-import { useRef } from 'react';
+import { useRef, useState } from 'react';
 import { FaWhatsapp } from 'react-icons/fa';
-import { HiMail, HiLocationMarker } from 'react-icons/hi';
+import { HiMail } from 'react-icons/hi';
+import { useLanguage } from '../contexts/LanguageContext';
+import ChatForm from './ChatForm';
 import './CTA.css';
 
 export default function CTA() {
   const ref = useRef(null);
   const inView = useInView(ref, { once: true, margin: '-80px' });
+  const { t } = useLanguage();
 
   return (
     <section className="cta section" id="contato" ref={ref}>
@@ -18,14 +21,13 @@ export default function CTA() {
             animate={inView ? { opacity: 1, x: 0 } : {}}
             transition={{ duration: 0.8 }}
           >
-            <span className="section-tag">Contato</span>
+            <span className="section-tag">{t('cta.tag')}</span>
             <h2 className="cta__title">
-              Sua empresa está pronta para operar com <span className="accent">tecnologia de verdade?</span>
+              {t('cta.title1')} <span className="accent">{t('cta.titleAccent')}</span>
             </h2>
             <p className="cta__description">
-              Transformamos processos manuais em sistemas inteligentes, automações e soluções com IA que reduzem custos e aceleram resultados.
+              {t('cta.description')}
             </p>
-
 
             <div className="cta__contacts">
               <a
@@ -38,7 +40,7 @@ export default function CTA() {
                   <FaWhatsapp />
                 </div>
                 <div>
-                  <label>WhatsApp Direto</label>
+                  <label>{t('cta.contacts.whatsappLabel')}</label>
                   <span>(17) 99220-4822</span>
                 </div>
               </a>
@@ -48,7 +50,7 @@ export default function CTA() {
                   <HiMail />
                 </div>
                 <div>
-                  <label>E-mail Corporativo</label>
+                  <label>{t('cta.contacts.emailLabel')}</label>
                   <span>contato@techthinksolutions.com.br</span>
                 </div>
               </a>
@@ -61,32 +63,10 @@ export default function CTA() {
             animate={inView ? { opacity: 1, scale: 1 } : {}}
             transition={{ delay: 0.2, duration: 0.6 }}
           >
-            <div className="cta__card">
-              <div className="cta__card-glow" />
-              <h3>Solicitar Diagnóstico</h3>
-              <form className="cta__form" onSubmit={(e) => e.preventDefault()}>
-                <div className="cta__input-group">
-                  <input type="text" placeholder="Seu nome completo" required />
-                </div>
-                <div className="cta__input-group">
-                  <input type="email" placeholder="E-mail profissional" required />
-                </div>
-                <div className="cta__input-group">
-                  <input type="tel" placeholder="Telefone / WhatsApp" required />
-                </div>
-                <div className="cta__input-group">
-                  <textarea placeholder="Fale brevemente sobre o seu projeto" rows={3} required />
-                </div>
-                <button type="submit" className="btn btn-primary cta__submit">
-                  <span>Enviar Mensagem</span>
-                  <FaWhatsapp />
-                </button>
-              </form>
-            </div>
+            <ChatForm />
           </motion.div>
         </div>
       </div>
-
     </section>
   );
 }

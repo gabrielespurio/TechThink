@@ -1,24 +1,26 @@
 import { motion, useInView } from 'framer-motion';
 import { useRef } from 'react';
 import { HiCode, HiLightningBolt, HiChip } from 'react-icons/hi';
+import { useLanguage } from '../contexts/LanguageContext';
 import './About.css';
-
-const pillars = [
-  {
-    icon: <HiLightningBolt size={24} />,
-    title: 'Nossa Missão',
-    desc: 'Levar tecnologia e inteligência artificial de forma acessível, prática e eficiente para todos os tipos de negócios.',
-  },
-  {
-    icon: <HiChip size={24} />,
-    title: 'Nossa Visão',
-    desc: 'Ser referência em desenvolvimento de soluções inteligentes, tornando a inovação essencial para o crescimento de empresas em todo o mundo.',
-  },
-];
 
 export default function About() {
   const ref = useRef(null);
   const inView = useInView(ref, { once: true, margin: '-100px' });
+  const { t } = useLanguage();
+
+  const pillars = [
+    {
+      icon: <HiLightningBolt size={24} />,
+      title: t('about.missionTitle'),
+      desc: t('about.missionDesc'),
+    },
+    {
+      icon: <HiChip size={24} />,
+      title: t('about.visionTitle'),
+      desc: t('about.visionDesc'),
+    },
+  ];
 
   return (
     <section className="about section" id="sobre" ref={ref}>
@@ -30,10 +32,10 @@ export default function About() {
           transition={{ duration: 0.6 }}
         >
           <h2 className="section-title">
-            Sobre <span className="accent">Nós</span>
+            {t('about.title1')} <span className="accent">{t('about.titleAccent')}</span>
           </h2>
           <p className="section-subtitle" style={{ textAlign: 'center' }}>
-            Somos uma empresa de tecnologia focada em desenvolver soluções sob medida que unem software e inteligência artificial para impulsionar resultados reais.
+            {t('about.subtitle')}
           </p>
         </motion.div>
 
@@ -45,23 +47,22 @@ export default function About() {
             transition={{ delay: 0.2, duration: 0.6 }}
           >
             <p className="about__story-text">
-              Acreditamos que a tecnologia não deve ser complexa ou inacessível — ela deve ser uma ferramenta estratégica para qualquer negócio crescer, otimizar processos e tomar decisões mais inteligentes.
+              {t('about.story1')}
             </p>
             <p className="about__story-text">
-              Nosso objetivo é democratizar o acesso à inovação, levando recursos avançados para empresas de pequeno, médio e grande porte. Queremos simplificar o uso da tecnologia, ajudando empresas a evoluírem com soluções automatizadas e orientadas por dados.
+              {t('about.story2')}
             </p>
 
             <div className="about__stats">
               {[
-                { val: 'IA', label: 'Integrada' },
-                { val: '100%', label: 'Foco em Resultado' },
+                { val: t('about.stats.stat1Val'), label: t('about.stats.stat1Label') },
+                { val: t('about.stats.stat2Val'), label: t('about.stats.stat2Label') },
               ].map((s, i) => (
                 <div key={i} className="about__stat">
                   <span className="about__stat-val">{s.val}</span>
                   <span className="about__stat-label">{s.label}</span>
                 </div>
               ))}
-
             </div>
           </motion.div>
 
